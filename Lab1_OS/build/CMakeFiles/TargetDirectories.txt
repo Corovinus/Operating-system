@@ -1,0 +1,5 @@
+D:/Progs/Project/CMake_Try/build/CMakeFiles/ALL_BUILD.dir
+D:/Progs/Project/CMake_Try/build/CMakeFiles/ZERO_CHECK.dir
+D:/Progs/Project/CMake_Try/build/CMake_Try/CMakeFiles/Main.dir
+D:/Progs/Project/CMake_Try/build/CMake_Try/CMakeFiles/Creator.dir
+D:/Progs/Project/CMake_Try/build/CMake_Try/CMakeFiles/Reporter.dir

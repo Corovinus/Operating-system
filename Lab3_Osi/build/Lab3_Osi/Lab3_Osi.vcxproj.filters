@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Progs\Project\Lab3_Osi\Lab3_Osi\Lab3_Osi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Progs\Project\Lab3_Osi\Lab3_Osi\Lab3_Osi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Progs\Project\Lab3_Osi\Lab3_Osi\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{158AB46D-00CE-329E-B0B6-242BC5F42828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4917E5FF-B325-3292-AA89-E7248CFDF5DE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

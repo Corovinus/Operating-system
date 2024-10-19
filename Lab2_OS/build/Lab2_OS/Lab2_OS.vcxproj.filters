@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Progs\Project\Lab2_OS\Lab2_OS\Lab2_OS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Progs\Project\Lab2_OS\Lab2_OS\Func_Lab2_OS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Progs\Project\Lab2_OS\Lab2_OS\Lab2_OS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Progs\Project\Lab2_OS\Lab2_OS\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{07EF5396-2660-3554-9089-6E980B3B0136}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A8A54887-ECF7-3335-9356-8DDD2FF10D8C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

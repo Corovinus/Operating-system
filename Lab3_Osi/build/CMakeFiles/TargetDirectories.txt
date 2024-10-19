@@ -1,0 +1,3 @@
+D:/Progs/Project/Lab3_Osi/build/CMakeFiles/ALL_BUILD.dir
+D:/Progs/Project/Lab3_Osi/build/CMakeFiles/ZERO_CHECK.dir
+D:/Progs/Project/Lab3_Osi/build/Lab3_Osi/CMakeFiles/Lab3_Osi.dir
