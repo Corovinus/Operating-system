@@ -10,6 +10,7 @@ if (POLICY CMP0141)
 endif()
 
 project ("Lab4_OS")
-
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Включите подпроекты.
 add_subdirectory ("Lab4_OS")

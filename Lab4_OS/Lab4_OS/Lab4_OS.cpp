@@ -2,12 +2,28 @@
 #include <windows.h>
 #include <vector>
 #include <iostream>
+#include <limits>
 #include <algorithm>
 using namespace std;
 
 vector<int> prosts;
 HANDLE hMutex; 
 
+int safeInput() {
+    int number;
+    while (true) {
+        cin >> number;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+            cout << "Некорректный ввод. Повторите попытку: ";
+        }
+        else {
+            cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+            return number;
+        }
+    }
+}
 bool isProst(int number) {
     if (number < 2) return false;
     for (int i = 2; i * i <= number; ++i) {
@@ -36,11 +52,16 @@ int main() {
     int startRange, endRange, numThreads;
 
     cout << "Введите начальное значение диапазона: ";
-    cin >> startRange;
+    startRange = safeInput();
     cout << "Введите конечное значение диапазона: ";
-    cin >> endRange;
+    endRange = safeInput();
     cout << "Введите количество потоков: ";
-    cin >> numThreads;
+    numThreads = safeInput();
+    if (startRange > endRange) {
+        int temp = startRange;
+		startRange = endRange;
+		endRange = temp;
+    }
 
     int rangePerThread = (endRange - startRange + 1) / numThreads;
     HANDLE* threads = new HANDLE[numThreads];
