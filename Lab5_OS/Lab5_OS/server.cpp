@@ -14,7 +14,6 @@ struct employee {
 string pipeName = "\\\\.\\pipe\\EmployeePipe";
 string fileName = "employees.dat";
 
-
 employee findEmployeeById(int id) {
     ifstream inFile(fileName, ios::binary);
     employee e;
@@ -43,7 +42,6 @@ void updateEmployee(const employee& newEmp) {
     throw runtime_error("Employee not found.");
 }
 
-
 void handleClient(HANDLE pipe) {
     DWORD bytesRead, bytesWritten;
     int command;
@@ -51,7 +49,7 @@ void handleClient(HANDLE pipe) {
     while (true) {
         if (!ReadFile(pipe, &command, sizeof(command), &bytesRead, NULL)) break;
 
-        if (command == 1) {  
+        if (command == 1) {
             int id;
             ReadFile(pipe, &id, sizeof(id), &bytesRead, NULL);
             try {
@@ -63,18 +61,19 @@ void handleClient(HANDLE pipe) {
                 WriteFile(pipe, &empty, sizeof(empty), &bytesWritten, NULL);
             }
         }
-        else if (command == 2) {  
+        else if (command == 2) {
             employee newEmp;
             ReadFile(pipe, &newEmp, sizeof(newEmp), &bytesRead, NULL);
             updateEmployee(newEmp);
         }
-        else if (command == 0) {  
+        else if (command == 0) {
             break;
         }
     }
     DisconnectNamedPipe(pipe);
     CloseHandle(pipe);
 }
+
 DWORD WINAPI clientHandler(LPVOID param) {
     HANDLE pipe = *(HANDLE*)param;
     handleClient(pipe);
@@ -92,14 +91,25 @@ void createFile() {
         employee e;
         cout << "Name, and Hours for employee " << i << ": ";
         cin >> e.name >> e.hours;
-		e.num = i;
+        e.num = i;
         outFile.write((char*)&e, sizeof(employee));
     }
     outFile.close();
 }
 
-void clientHandlerThread() {
-    while (true) {
+void printFile() {
+    ifstream inFile(fileName, ios::binary);
+    employee e;
+    while (inFile.read((char*)&e, sizeof(employee))) {
+        cout << "ID: " << e.num << "\t Name: " << e.name << " " << e.hours << endl;
+    }
+    inFile.close();
+}
+
+void startServer(int numThreads) {
+    vector<HANDLE> threads(numThreads);
+
+    for (int i = 0; i < numThreads; ++i) {
         HANDLE pipe = CreateNamedPipeA(
             pipeName.c_str(),
             PIPE_ACCESS_DUPLEX,
@@ -108,7 +118,7 @@ void clientHandlerThread() {
             512, 512, 0, NULL);
 
         if (pipe == INVALID_HANDLE_VALUE) {
-            cerr << "Failed to create named pipe.\n";
+            cerr << "Failed to create named pipe." << endl;
             return;
         }
 
@@ -116,78 +126,72 @@ void clientHandlerThread() {
         if (ConnectNamedPipe(pipe, NULL) || GetLastError() == ERROR_PIPE_CONNECTED) {
             cout << "Client connected.\n";
             HANDLE* param = new HANDLE(pipe);
-            HANDLE threadHandle = CreateThread(
-                NULL,                      
-                0,                         
-                clientHandler,             
-                param,                     
-                0,                         
-                NULL);                     
+            threads[i] = CreateThread(
+                NULL,
+                0,
+                clientHandler,
+                param,
+                0,
+                NULL
+            );
 
-            if (threadHandle == NULL) {
-                cerr << "Failed to create client handler thread.\n";
-                delete param; 
+            if (threads[i] == NULL) {
+                cerr << "Failed to create thread for client." << endl;
+                delete param;
                 CloseHandle(pipe);
-            }
-            else {
-                CloseHandle(threadHandle); 
             }
         }
         else {
             CloseHandle(pipe);
         }
     }
+
+    for (HANDLE thread : threads) {
+        if (thread) {
+            WaitForSingleObject(thread, INFINITE);
+            CloseHandle(thread);
+        }
+    }
 }
-void printFile() {
-	ifstream inFile(fileName, ios::binary);
-	employee e;
-	while (inFile.read((char*)&e, sizeof(employee))) {
-		cout << "ID: " << e.num << "\t Name: " << e.name << " " << e.hours << endl;
-	}
-	inFile.close();
-}
+
 void startClients(int numClients) {
     for (int i = 0; i < numClients; ++i) {
-        string command = "client.exe";  
+        string command = "client.exe";
         STARTUPINFOA si = { sizeof(STARTUPINFOA) };
         PROCESS_INFORMATION pi;
 
         if (!CreateProcessA(
-            NULL,                      
-            command.data(),            
-            NULL,                      
-            NULL,                      
-            FALSE,                     
-            CREATE_NEW_CONSOLE,        
-            NULL,                      
-            NULL,                      
-            &si,                       
-            &pi)) {                    
-            cerr << "Failed to create client process.\n";
+            NULL,
+            command.data(),
+            NULL,
+            NULL,
+            FALSE,
+            CREATE_NEW_CONSOLE,
+            NULL,
+            NULL,
+            &si,
+            &pi)) {
+            cerr << "Failed to create client process." << endl;
         }
         else {
-            cout << "Client process " << i + 1 << " started.\n";
+            cout << "Client process " << i + 1 << " started." << endl;
             CloseHandle(pi.hProcess);
             CloseHandle(pi.hThread);
         }
     }
 }
+
 int main() {
     createFile();
     printFile();
+
     int numClients;
     cout << "Enter the number of clients to start: ";
     cin >> numClients;
 
     startClients(numClients);
+    startServer(numClients);
 
-    HANDLE mutex = CreateMutexA(NULL, FALSE, "EmployeeMutex");
-    if (!mutex) {
-        cerr << "Failed to create mutex.\n";
-        return 1;
-    }
-    clientHandlerThread();
     printFile();
-
     return 0;
 }
