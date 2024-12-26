@@ -1,0 +1,16 @@
+D:/Progs/Operating system/Lab2_1_OS/build/CMakeFiles/INSTALL.dir
+D:/Progs/Operating system/Lab2_1_OS/build/CMakeFiles/ALL_BUILD.dir
+D:/Progs/Operating system/Lab2_1_OS/build/CMakeFiles/ZERO_CHECK.dir
+D:/Progs/Operating system/Lab2_1_OS/build/Lab2_1_OS/CMakeFiles/Lab2_1_OS.dir
+D:/Progs/Operating system/Lab2_1_OS/build/Lab2_1_OS/CMakeFiles/Lab2_Tests.dir
+D:/Progs/Operating system/Lab2_1_OS/build/Lab2_1_OS/CMakeFiles/INSTALL.dir
+D:/Progs/Operating system/Lab2_1_OS/build/_deps/googletest-build/CMakeFiles/INSTALL.dir
+D:/Progs/Operating system/Lab2_1_OS/build/_deps/googletest-build/CMakeFiles/ALL_BUILD.dir
+D:/Progs/Operating system/Lab2_1_OS/build/_deps/googletest-build/googlemock/CMakeFiles/gmock.dir
+D:/Progs/Operating system/Lab2_1_OS/build/_deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir
+D:/Progs/Operating system/Lab2_1_OS/build/_deps/googletest-build/googlemock/CMakeFiles/INSTALL.dir
+D:/Progs/Operating system/Lab2_1_OS/build/_deps/googletest-build/googlemock/CMakeFiles/ALL_BUILD.dir
+D:/Progs/Operating system/Lab2_1_OS/build/_deps/googletest-build/googletest/CMakeFiles/gtest.dir
+D:/Progs/Operating system/Lab2_1_OS/build/_deps/googletest-build/googletest/CMakeFiles/gtest_main.dir
+D:/Progs/Operating system/Lab2_1_OS/build/_deps/googletest-build/googletest/CMakeFiles/INSTALL.dir
+D:/Progs/Operating system/Lab2_1_OS/build/_deps/googletest-build/googletest/CMakeFiles/ALL_BUILD.dir
